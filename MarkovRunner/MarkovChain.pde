@@ -8,11 +8,13 @@ class MarkovChain {
   List<String> words;
   Map<String, ArrayList<String>> data;
   String startWord;
+  int wordLimit;
 
   MarkovChain() {
     data=new HashMap<String, ArrayList<String>>();
     words=new ArrayList<String>();
     startWord="error";
+    wordLimit=5;
   }
 
   void trainMap(String doc) {
@@ -42,24 +44,33 @@ class MarkovChain {
   void setStartWord(String start) {
     startWord=start;
   }
+  
+  void setWordLimit(int num){
+    wordLimit=num;
+  }
 
   String generateText() {
     if (startWord.equals("error")) {
       return "Train the map.";
+    }else if(data.get(startWord)==null){
+      return "generating error";
     } else {
-      String txt=startWord.substring(0,1).toUpperCase()+startWord.substring(1)+" ";
+      String txt=startWord+" ";
       int randIn1=getRandomIndex(startWord);
-      int words=0;
       String newStr=data.get(startWord).get(randIn1);
       txt+=newStr;
-      while (words<=7) {
+      int punct=0;
+      for(int words=3;words<=wordLimit;words++) {
         randIn1=getRandomIndex(newStr);
         newStr=data.get(newStr).get(randIn1);
         txt+=" ";
         txt+=newStr;
-        words++;
-        startWord=newStr;
+        if(newStr.contains(".")||newStr.contains(";")||newStr.contains("!")||newStr.contains("?")){
+          punct++;
+        }
       }
+      randIn1=getRandomIndex(newStr);
+      startWord=data.get(newStr).get(randIn1);
       return txt;
     }
   }
@@ -69,7 +80,7 @@ class MarkovChain {
     int randomIndex=(int)random(limit);
     return randomIndex;
   }
-  
+
   String toString() {
     String op="";
     for (Map.Entry<String, ArrayList<String>> entry : data.entrySet()) {

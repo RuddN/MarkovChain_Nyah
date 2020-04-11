@@ -5,31 +5,38 @@ import java.util.Arrays;
 import static java.lang.System.*;
 import java.awt.*;
 import javax.swing.*;
-PImage mlkp, trumpp, sandersp, obamap;
+PImage mlkp, trumpp, sandersp, obamap, seussp;
 String spkr;
-MarkovChain fish, mlk, trump, sanders, obama;
+String[] speech=new String[16];
+
+MarkovChain fish=new MarkovChain();
+MarkovChain mlk=new MarkovChain();
+MarkovChain trump=new MarkovChain();
+MarkovChain sanders=new MarkovChain();
+MarkovChain obama=new MarkovChain();
+
 void setup() {
-  size(900, 750);
+  size(1200, 750);
   //loadPortraits
   mlkp=loadImage("mlk.jpeg");
   trumpp=loadImage("trump.jpeg");
   sandersp=loadImage("sanders.jpeg");
   obamap=loadImage("obama.jpeg");
+  seussp=loadImage("seuss.jpeg");
   
-  MarkovChain fish=new MarkovChain();
+  //train maps
   fish.trainMap("fishies.txt");
-  System.out.print(fish.generateText());
+  fish.setStartWord("Red");
+  fish.setWordLimit(9);
+  //System.out.print(fish.generateText());
   
-  MarkovChain mlk=new MarkovChain();
-  //mlk.trainMap("mlk.txt");
-  MarkovChain trump=new MarkovChain();
-  //trump.trainMap("trump.txt");
-  MarkovChain sanders=new MarkovChain();
-  //sanders.trainMap("sanders.txt");
-  MarkovChain obama=new MarkovChain();
-  //obama.trainMap("obama.txt");
+  /*mlk.trainMap("mlk.txt");
+  trump.trainMap("trump.txt");
+  sanders.trainMap("sanders.txt");
+  obama.trainMap("obama.txt");*/
   
   spkr="seuss";
+  generateSpeech(spkr);
 }
 
 void draw(){
@@ -38,12 +45,13 @@ void draw(){
   fill(0);
   drawFormat();
   run(spkr);
-  writeSpeech(spkr);
+  writeSpeech();
 }
 
 void mouseClicked(){
   if(mouseX>=42&&mouseX<=167&&mouseY>=555&&mouseY<=605){
     spkr="mlk";
+    generateSpeech(spkr);
   } else if(mouseX>=183&&mouseX<=308&&mouseY>=555&&mouseY<=605){
     spkr="trump";
   } else if(mouseX>=42&&mouseX<=167&&mouseY>=620&&mouseY<=670){
