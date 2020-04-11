@@ -10,6 +10,12 @@ void drawFormat() {
   text("Generate a Speech!", 25, 75);
   fill(0, 87, 158);
   text("Generate a Speech!", 32, 82);
+  //note
+  textSize(20);
+  fill(171, 255, 175);
+  text("~Watch for fishies!~", 966, 79);
+  fill(0, 87, 158);
+  text("~Watch for fishies!~", 970, 83);
   //button rects
   fill(255);
   rect(42, 555, 125, 50, 15);
@@ -51,11 +57,11 @@ void generateSpeech(String name) {
     }
     obama.setStartWord("our");
   } else if (name.equals("seuss")) {
-    speech[0]=fish.generateText(true);
+    speech[0]=seuss.generateText(true);
     for (int i=1; i<16; i++) {
-      speech[i]=fish.generateText(false);
+      speech[i]=seuss.generateText(false);
     }
-    fish.setStartWord("Red");
+    seuss.setStartWord("Red");
   }
   if (speech[15].contains(".")) {
     speech[15]=speech[15].substring(0, speech[15].indexOf(".")+1);
