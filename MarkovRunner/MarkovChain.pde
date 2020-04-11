@@ -44,30 +44,37 @@ class MarkovChain {
   void setStartWord(String start) {
     startWord=start;
   }
-  
-  void setWordLimit(int num){
+
+  void setWordLimit(int num) {
     wordLimit=num;
   }
 
-  String generateText() {
+  String generateText(boolean cap) {
     if (startWord.equals("error")) {
       return "Train the map.";
-    }else if(data.get(startWord)==null){
+    } else if (data.get(startWord)==null) {
       return "generating error";
     } else {
       String txt=startWord+" ";
+      if (cap) {
+        if (startWord.length()>1) {
+          txt=startWord.substring(0, 1).toUpperCase()+startWord.substring(1)+" ";
+        } else {
+          txt=startWord.toUpperCase();
+        }
+      }
       int randIn1=getRandomIndex(startWord);
       String newStr=data.get(startWord).get(randIn1);
       txt+=newStr;
-      int punct=0;
-      for(int words=3;words<=wordLimit;words++) {
+      //int punct=0;
+      for (int words=3; words<=wordLimit; words++) {
         randIn1=getRandomIndex(newStr);
         newStr=data.get(newStr).get(randIn1);
         txt+=" ";
         txt+=newStr;
-        if(newStr.contains(".")||newStr.contains(";")||newStr.contains("!")||newStr.contains("?")){
+        /*if (newStr.contains(".")||newStr.contains(";")||newStr.contains("!")||newStr.contains("?")) {
           punct++;
-        }
+        }*/
       }
       randIn1=getRandomIndex(newStr);
       startWord=data.get(newStr).get(randIn1);

@@ -27,33 +27,55 @@ void drawFormat() {
 
 void generateSpeech(String name) {
   if (name.equals("mlk")) {
-  } else if (name.equals("trump")) {
-  } else if (name.equals("sanders")) {
-  } else if (name.equals("obama")) {
-  } else if (name.equals("seuss")) {
-    for(int i=0;i<16;i++){
-      speech[i]=fish.generateText();
+    speech[0]=mlk.generateText(true);
+    for (int i=1; i<16; i++) {
+      speech[i]=mlk.generateText(false);
     }
+    mlk.setStartWord("our");
+  } else if (name.equals("trump")) {
+    speech[0]=trump.generateText(true);
+    for (int i=1; i<16; i++) {
+      speech[i]=trump.generateText(false);
+    }
+    trump.setStartWord("our");
+  } else if (name.equals("sanders")) {
+    speech[0]=sanders.generateText(true);
+    for (int i=1; i<16; i++) {
+      speech[i]=sanders.generateText(false);
+    }
+    sanders.setStartWord("our");
+  } else if (name.equals("obama")) {
+    speech[0]=obama.generateText(true);
+    for (int i=1; i<16; i++) {
+      speech[i]=obama.generateText(false);
+    }
+    obama.setStartWord("our");
+  } else if (name.equals("seuss")) {
+    speech[0]=fish.generateText(true);
+    for (int i=1; i<16; i++) {
+      speech[i]=fish.generateText(false);
+    }
+    fish.setStartWord("Red");
   }
-  if(speech[15].contains(".")){
+  if (speech[15].contains(".")) {
     speech[15]=speech[15].substring(0, speech[15].indexOf(".")+1);
-  }else if(speech[15].contains(";")){
+  } else if (speech[15].contains(";")) {
     speech[15]=speech[15].substring(0, speech[15].indexOf(";"));
     speech[15]+=".";
-  }else if(speech[15].contains("!")){
+  } else if (speech[15].contains("!")) {
     speech[15]=speech[15].substring(0, speech[15].indexOf("!")+1);
-  }else if(speech[15].contains("?")){
+  } else if (speech[15].contains("?")) {
     speech[15]=speech[15].substring(0, speech[15].indexOf("?")+1);
   } else {
     speech[15]+=".";
   }
 }
 
-void writeSpeech(){
+void writeSpeech() {
   textSize(25); 
   fill(0, 87, 158); 
   int y=215;
-  for(int i=0;i<16;i++){
+  for (int i=0; i<16; i++) {
     text(speech[i], 375, y);
     y+=30;
   }
@@ -114,7 +136,7 @@ void run(String name) {
     text("Obama", 195, 657);
   } else if (name.equals("seuss")) {
     //portrait
-    image(seussp,50,130);
+    image(seussp, 50, 130);
     //title
     fill(0, 87, 158); 
     textSize(40); 

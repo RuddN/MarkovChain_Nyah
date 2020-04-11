@@ -28,14 +28,27 @@ void setup() {
   fish.trainMap("fishies.txt");
   fish.setStartWord("Red");
   fish.setWordLimit(9);
-  //System.out.print(fish.generateText());
   
-  /*mlk.trainMap("mlk.txt");
+  mlk.trainMap("mlk.txt");
+  mlk.setStartWord("our");
+  mlk.setWordLimit(8);
+  
   trump.trainMap("trump.txt");
-  sanders.trainMap("sanders.txt");
-  obama.trainMap("obama.txt");*/
+  trump.setStartWord("our");
+  trump.setWordLimit(7);
   
-  spkr="seuss";
+  sanders.trainMap("sanders.txt");
+  sanders.setStartWord("our");
+  sanders.setWordLimit(7);
+  
+  obama.trainMap("obama.txt");
+  obama.setStartWord("our");
+  obama.setWordLimit(8);
+  
+  //print data
+  //System.out.println(trump.toString());
+  
+  spkr="mlk";
   generateSpeech(spkr);
 }
 
@@ -54,9 +67,12 @@ void mouseClicked(){
     generateSpeech(spkr);
   } else if(mouseX>=183&&mouseX<=308&&mouseY>=555&&mouseY<=605){
     spkr="trump";
+    generateSpeech(spkr);
   } else if(mouseX>=42&&mouseX<=167&&mouseY>=620&&mouseY<=670){
     spkr="sanders";
+    generateSpeech(spkr);
   } else if(mouseX>=183&&mouseX<=308&&mouseY>=620&&mouseY<=670){
     spkr="obama";
+    generateSpeech(spkr);
   }
 }
